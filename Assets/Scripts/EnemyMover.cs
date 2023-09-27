@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
-    private readonly float _speed = 1f;
+    private Vector3 _direction;
 
-    private Transform _needPosition;
+    private readonly float _speed = 3f;
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, _needPosition.position, _speed * Time.deltaTime);
+        transform.position += _direction * _speed * Time.deltaTime;
     }
 
-    public void Init(Transform position)
+    public void InitDirection(Vector3 direction)
     {
-        _needPosition = position;
+        _direction = direction;
     }
 }
