@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Enemy _prefabEnemy;
     [SerializeField] private Transform[] _positionSpawn;
 
+    private Coroutine _coroutine;
     private int _countDirection = 4;
 
     private readonly WaitForSeconds _waitForSeconds = new WaitForSeconds(2f);
@@ -14,10 +15,13 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        if (_coroutine != null)
+            StopCoroutine(SpawnEnemy());
+
         StartCoroutine(SpawnEnemy());
     }
 
-    IEnumerator SpawnEnemy()
+    private IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < _needEnemyCount; i++)
         {
